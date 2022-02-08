@@ -3,17 +3,17 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Chrome;
+using TestHelpers;
 
 public class TestClass
 {
     public IWebDriver driver;
 
-    [SetUp]
-    public void TestSetup()
+    [OneTimeSetUp]
+    public void Setup()
     {
-        driver = new ChromeDriver();
-        driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-        driver.Navigate().GoToUrl("http://google.com");
+        Browser.CreateDriver();
+        Browser.NaigateTo();
     }
 
     [Test]
@@ -22,9 +22,10 @@ public class TestClass
         Console.WriteLine("Test numero Uno");
     }
 
-    [TearDown]
-    public void TestTearDown()
+    [OneTimeTearDown]
+    public void TearDown()
     {
-        driver.Quit();
+        Browser.Driver.Close();
+        Browser.Driver.Quit();
     }
 }
