@@ -4,7 +4,6 @@ namespace TestHelpers
     {
         public static Random Rng { get; set; }
 
-
         public static void CreateGenerators()
         {
             Rng = new Random();
@@ -14,7 +13,7 @@ namespace TestHelpers
         /// Generates email address either valid or invalid. Example: "username68@test.test"
         /// </summary>
         /// <param name="valid">If False, returns nonsense instead of email.</param>
-        /// <returns>Generated email or nonsense</returns>
+        /// <returns>string</returns>
         public static string GenerateEmailAddress(bool valid)
         {
             var randomInt = Rng.Next(1000);

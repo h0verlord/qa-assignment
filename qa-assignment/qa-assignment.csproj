@@ -13,6 +13,5 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="98.0.4758.8000"/>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-release-20220113-05"/>
     <PackageReference Include="Selenium.Support" Version="4.1.0"/>
-    <PackageReference Include="Tynamix.ObjectFiller" Version="1.5.7"/>
   </ItemGroup>
 </Project>

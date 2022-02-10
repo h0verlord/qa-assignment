@@ -30,6 +30,18 @@ namespace PageObjects
             // Select heading from dropdown.
             var subject = new SelectElement(Browser.Driver.FindElement(subjectDropDown));
             subject.SelectByIndex(1);
+            // Enter a valid Email Address
+            Browser.Driver.FindElement(emailInput).SendKeys(Generators.GenerateEmailAddress(true));
+            // Fill in order number
+            Browser.Driver.FindElement(orderInput).SendKeys("123456789");
+            // upload a file
+            Browser.Driver.FindElement(fileInput).SendKeys(this.GetAttachmentPath());
+            return this;
+        }
+
+        private ContactUsPage SubmitForm()
+        {
+            Browser.Driver.FindElement(sendBtn).Click();
             return this;
         }
     }
