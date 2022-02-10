@@ -10,11 +10,20 @@ using TestHelpers;
 namespace PageObjects
 {
     public class BasePage
-    {
+    {   
+        private By logoImg = By.CssSelector(".logo.img-responsive");
         private By searchForm = By.Id("searchbox");
         private By searchInput = By.Id("search_query_top");
         private By searchBtn = By.CssSelector("button.btn.btn-default.button-search");
-        
+        private By signInLink = By.CssSelector("a.login");
+        private By signOutLink = By.CssSelector("a.logout");
+        private By userNameLink = By.CssSelector("a.account");
+
+        public BasePage()
+        {
+            Browser.Wait.Until(e => e.FindElement(logoImg).Displayed);
+        }
+
         /// <summary>
         /// Type given search term into search bar and press Search button
         /// </summary>
@@ -25,6 +34,12 @@ namespace PageObjects
             Browser.Driver.FindElement(searchInput).SendKeys(keywords);
             Browser.Driver.FindElement(searchBtn).Click();
             return new SearchResults(keywords);
+        }
+
+        public SignIn ClickSignInBtn()
+        {
+            Browser.Driver.FindElement(signInLink).Click();
+            return new SignIn();
         }
     }
 }
