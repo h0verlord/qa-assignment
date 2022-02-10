@@ -11,7 +11,7 @@ namespace TestHelpers
         public static Actions Builder { get; set; }
         public static WebDriverWait Wait { get; set; }
 
-        public const string HomePageUrl = "http://google.com";
+        public const string HomePageUrl = "http://automationpractice.com/index.php";
 
         public static void CreateDriver()
         {
@@ -30,10 +30,11 @@ namespace TestHelpers
             return path.Remove(path.LastIndexOf("bin")) + "TestSolution/Driver";
         }
 
-        public static void NaigateTo(string url = HomePageUrl, string path = "")
+        public static void NavigateTo(string url = HomePageUrl, string path = "")
         {
             var urlString = string.Format("{0}/{1}", url, path);
             Browser.Driver.Navigate().GoToUrl(urlString);
+            Browser.Driver.Manage().Window.Maximize();
         }
     }
 }
