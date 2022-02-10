@@ -8,6 +8,7 @@ public class RegistrationTest
     public void Setup()
     {
         Browser.CreateDriver();
+        Generators.CreateGenerators();
         Browser.NavigateTo();
     }
 

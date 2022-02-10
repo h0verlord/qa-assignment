@@ -39,13 +39,9 @@ public class RegistrationPage
     private By dataAlerts = By.CssSelector("div.alert.alert-danger");
     private By registerBtn = By.Id("submitAccount");
 
-    private Random rng { get; set; }
-
-
     public RegistrationPage()
     {
         Browser.Wait.Until(e => e.FindElement(stateSelectEl));
-        rng = new Random();
     }
 
     /// <summary>
@@ -86,8 +82,10 @@ public class RegistrationPage
         // Enter a city name
         Browser.Driver.FindElement(cityInput).SendKeys("Prague");
         // Select a state from dropdown / Alabama
+        // this.WaitUntilStatesLoad();
         var stateSelect = new SelectElement(Browser.Driver.FindElement(stateSelectEl));
-        stateSelect.SelectByIndex(rng.Next(stateSelect.Options.Count)-1);
+        // Browser.Wait.Until(e=>e);
+        stateSelect.SelectByIndex(Generators.Rng.Next(stateSelect.Options.Count)-1);
         // Enter Postcode
         Browser.Driver.FindElement(postcodeInput).SendKeys("12345");
         // Select Country from dropdown / United States

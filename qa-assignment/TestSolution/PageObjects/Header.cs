@@ -18,6 +18,7 @@ namespace PageObjects
         private By signInLink = By.CssSelector("a.login");
         private By signOutLink = By.CssSelector("a.logout");
         private By userNameLink = By.CssSelector("a.account");
+        private By contactLink = By.CssSelector("contact-link > a");
 
         public BasePage()
         {
