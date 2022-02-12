@@ -18,7 +18,7 @@ namespace PageObjects
         private By signInLink = By.CssSelector("a.login");
         private By signOutLink = By.CssSelector("a.logout");
         private By userNameLink = By.CssSelector("a.account");
-        private By contactLink = By.CssSelector("contact-link > a");
+        private By contactLink = By.CssSelector("#contact-link > a");
 
         public BasePage()
         {
@@ -41,6 +41,11 @@ namespace PageObjects
         {
             Browser.Driver.FindElement(signInLink).Click();
             return new SignIn();
+        }
+
+        public ContactUsPage ClickContactUsBtn(){
+            Browser.Driver.FindElement(contactLink).Click();
+            return new ContactUsPage();
         }
     }
 }

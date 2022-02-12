@@ -13,6 +13,8 @@ namespace PageObjects
         private By fileInput = By.Id("fileUpload");
         private By messageArea = By.Id("message");
         private By sendBtn = By.Id("submitMessage");
+        private By alertSuccess = By.CssSelector("p.alert.alert-success");
+        private By alertError = By.CssSelector("div.alert.alert-danger");
 
         public ContactUsPage()
         {
@@ -25,7 +27,7 @@ namespace PageObjects
             return path.Remove(path.LastIndexOf("bin")) + "Attachment/Attachment.pdf";
         }
 
-        private ContactUsPage FillInFormData()
+        public ContactUsPage FillInFormData()
         {
             // Select heading from dropdown.
             var subject = new SelectElement(Browser.Driver.FindElement(subjectDropDown));
@@ -36,13 +38,23 @@ namespace PageObjects
             Browser.Driver.FindElement(orderInput).SendKeys("123456789");
             // upload a file
             Browser.Driver.FindElement(fileInput).SendKeys(this.GetAttachmentPath());
+            // Add a message
+            Browser.Driver.FindElement(messageArea).SendKeys("Test Test Test 1:!!");
             return this;
         }
 
-        private ContactUsPage SubmitForm()
+        public ContactUsPage SubmitForm()
         {
             Browser.Driver.FindElement(sendBtn).Click();
             return this;
+        }
+
+        public bool CheckIfSentSuccessfully(){
+            return Browser.Wait.Until(e => e.FindElement(alertSuccess).Displayed);
+        }
+
+        public bool CheckIfErrorDisplayed(){
+            return Browser.Wait.Until(e => e.FindElement(alertError).Displayed);
         }
     }
 }

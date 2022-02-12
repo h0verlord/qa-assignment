@@ -12,12 +12,26 @@ public class ContactUsTest
         Browser.NavigateTo();
     }
 
-    
+
     [Test]
     public void TestSendValidContactForm()
     {
         var homePage = new BasePage();
+        var contactUs = homePage.ClickContactUsBtn();
+        contactUs.FillInFormData();
+        contactUs.SubmitForm();
+        Assert.IsTrue(contactUs.CheckIfSentSuccessfully());
     }
+
+    [Test]
+    public void TestSendEmptyContactForm()
+    {
+        var homePage = new BasePage();
+        var contactUs = homePage.ClickContactUsBtn();
+        contactUs.SubmitForm();
+        Assert.IsTrue(contactUs.CheckIfErrorDisplayed());
+    }
+
 
     [OneTimeTearDown]
     public void TearDown()
