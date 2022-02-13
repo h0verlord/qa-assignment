@@ -12,6 +12,7 @@ public class SearchTest
     public void Setup()
     {
         Browser.CreateDriver();
+        Generators.CreateGenerators();
         Browser.NavigateTo();
     }
 
