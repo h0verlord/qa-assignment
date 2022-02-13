@@ -1,11 +1,9 @@
-
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using PageObjects;
 using TestHelpers;
 
-public class RegistrationPage
+public class Registration
 {
 
     #region Personal Info Elements
@@ -39,7 +37,7 @@ public class RegistrationPage
     private By dataAlerts = By.CssSelector("div.alert.alert-danger");
     private By registerBtn = By.Id("submitAccount");
 
-    public RegistrationPage()
+    public Registration()
     {
         Browser.Wait.Until(e => e.FindElement(stateSelectEl));
     }
@@ -48,19 +46,18 @@ public class RegistrationPage
     /// Clicks on a Register Button.
     /// </summary>
     /// <returns>This Registration Page</returns>
-    public MyAccountPage SubmitCreateAccountForm()
+    public MyAccount SubmitCreateAccountForm()
     {
         Browser.Driver.FindElement(registerBtn).Click();
-        return new MyAccountPage();
+        return new MyAccount();
     }
 
     /// <summary>
     /// Fills In all Mandatory Fields in Registration Form.
     /// </summary>
     /// <returns></returns>
-    public RegistrationPage FillMandatoryFields()
+    public Registration FillMandatoryFields()
     {
-        // Browser.Wait.Until(e => e.FindElement(accountCreate).Displayed);
         // Choose Gender
         Browser.Driver.FindElements(genderInputs).First().Click();
         // Enter First and Last name
@@ -76,16 +73,12 @@ public class RegistrationPage
         monthSelect.SelectByIndex(1);
         yearSelect.SelectByIndex(1);
         // Enter Address Info, first, last name
-        // Browser.Driver.FindElement(firstNameInput).SendKeys("Johnny");
-        // Browser.Driver.FindElement(lastNameInput).SendKeys("Does");
         Browser.Driver.FindElement(addressInput).SendKeys("123");
         // Enter a city name
         Browser.Driver.FindElement(cityInput).SendKeys("Prague");
         // Select a state from dropdown / Alabama
-        // this.WaitUntilStatesLoad();
-        var stateSelect = new SelectElement(Browser.Driver.FindElement(stateSelectEl));
-        // Browser.Wait.Until(e=>e);
-        stateSelect.SelectByIndex(Generators.Rng.Next(stateSelect.Options.Count)-1);
+        var stateSelect = WaitUntilStatesLoad();
+        stateSelect.SelectByIndex(Generators.Rng.Next(1, stateSelect.Options.Count)-1);
         // Enter Postcode
         Browser.Driver.FindElement(postcodeInput).SendKeys("12345");
         // Select Country from dropdown / United States
@@ -94,14 +87,19 @@ public class RegistrationPage
         // Enter a Phone Number
         Browser.Driver.FindElement(mobileInput).SendKeys("123456789");
         // Enter Address Alias
-        // Browser.Driver.FindElement(addressAliasInput).SendKeys("Address Alias");
         return this;
     }
 
-    public bool WaitUntilStatesLoad()
+    /// <summary>
+    /// Waits until Elements in the select dropdown input are at least 3
+    /// and then returns new Select Element. 
+    /// Sometimes having problems with States dropdown select input field.
+    /// </summary>
+    /// <returns></returns>
+    public SelectElement WaitUntilStatesLoad()
     {
-        Browser.Wait.Until(e => e.FindElements(stateSelectElCollection).ToList().Count == 51);
-        return true;
+        Browser.Wait.Until(e => e.FindElements(stateSelectElCollection).ToList().Count > 2);
+        return new SelectElement(Browser.Driver.FindElement(stateSelectEl));
     }
 
 }

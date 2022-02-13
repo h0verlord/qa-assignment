@@ -1,9 +1,3 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
-// using NUnit.Framework;
 using OpenQA.Selenium;
 using TestHelpers;
 
@@ -37,15 +31,23 @@ namespace PageObjects
             return new SearchResults(keywords);
         }
 
+        /// <summary>
+        /// Clicks the Sign In Button.
+        /// </summary>
+        /// <returns></returns>
         public SignIn ClickSignInBtn()
         {
             Browser.Driver.FindElement(signInLink).Click();
             return new SignIn();
         }
 
-        public ContactUsPage ClickContactUsBtn(){
+        /// <summary>
+        /// Clicks the Contact Us Button
+        /// </summary>
+        /// <returns></returns>
+        public ContactUs ClickContactUsBtn(){
             Browser.Driver.FindElement(contactLink).Click();
-            return new ContactUsPage();
+            return new ContactUs();
         }
     }
 }

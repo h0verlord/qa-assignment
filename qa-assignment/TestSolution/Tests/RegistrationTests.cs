@@ -47,7 +47,7 @@ public class RegistrationTest
         var homePage = new BasePage();
         var signInPage = homePage.ClickSignInBtn();
         signInPage.FillEmailCreateForm(true);
-        var registration = new RegistrationPage();
+        var registration = new Registration();
         registration.FillMandatoryFields();
         var accountPage = registration.SubmitCreateAccountForm();
         Assert.IsTrue(accountPage.VerifyMyAccountIsOpened(), "MyAccount Page not opened after registration.");

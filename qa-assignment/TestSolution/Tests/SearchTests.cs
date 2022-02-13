@@ -35,7 +35,7 @@ public class SearchTest
     {
         var homePage = new BasePage();
         var searchResult = homePage.SearchTerm("");
-        Assert.IsTrue(searchResult.SearchTermAssert, "Expected Message 'Please enter a search keyword' not found.");
+        Assert.IsTrue(searchResult.EmptySearchTermAssert, "Expected Message 'Please enter a search keyword' not found.");
     }
 
     [OneTimeTearDown]

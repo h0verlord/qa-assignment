@@ -4,7 +4,7 @@ using TestHelpers;
 
 namespace PageObjects
 {
-    public class ContactUsPage
+    public class ContactUs
     {
         private By contactFormBox = By.ClassName("contact-form-box");
         private By subjectDropDown = By.Id("id_contact");
@@ -16,18 +16,26 @@ namespace PageObjects
         private By alertSuccess = By.CssSelector("p.alert.alert-success");
         private By alertError = By.CssSelector("div.alert.alert-danger");
 
-        public ContactUsPage()
+        public ContactUs()
         {
             Browser.Wait.Until(e => e.FindElement(contactFormBox).Displayed);
         }
 
+        /// <summary>
+        /// Gets a relative path to the attachment.pdf file located in the repository.
+        /// </summary>
+        /// <returns></returns>
         private string GetAttachmentPath()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory;
             return path.Remove(path.LastIndexOf("bin")) + "Attachment/Attachment.pdf";
         }
-
-        public ContactUsPage FillInFormData()
+        
+        /// <summary>
+        /// Fill In all form data.
+        /// </summary>
+        /// <returns></returns>
+        public ContactUs FillInFormData()
         {
             // Select heading from dropdown.
             var subject = new SelectElement(Browser.Driver.FindElement(subjectDropDown));
@@ -43,16 +51,28 @@ namespace PageObjects
             return this;
         }
 
-        public ContactUsPage SubmitForm()
+        /// <summary>
+        /// Clicks the Submit Form Button.
+        /// </summary>
+        /// <returns></returns>
+        public ContactUs SubmitForm()
         {
             Browser.Driver.FindElement(sendBtn).Click();
             return this;
         }
 
+        /// <summary>
+        /// Returns true if the Success Message is displayed.
+        /// </summary>
+        /// <returns></returns>
         public bool CheckIfSentSuccessfully(){
             return Browser.Wait.Until(e => e.FindElement(alertSuccess).Displayed);
         }
 
+        /// <summary>
+        /// Returns true id the error message is displayed.
+        /// </summary>
+        /// <returns></returns>
         public bool CheckIfErrorDisplayed(){
             return Browser.Wait.Until(e => e.FindElement(alertError).Displayed);
         }
