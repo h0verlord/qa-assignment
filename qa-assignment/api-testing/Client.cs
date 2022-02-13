@@ -1,28 +1,27 @@
 using RestSharp;
+using RestSharp.Authenticators;
 
 namespace ApiTesting
 {
-    public class Client
+    class RestfulClient
     {
-        public static RestClient ApiClient { get; set; }
-        public static RestClientOptions ClientOptions { get; set; }
+        public static RestClient Client { get; set; }
 
-        public static RestRequest Request { get; set; }
-        public static RestResponse Response { get; set; }
 
         public static void CreateClient()
         {
-            var options = new RestClientOptions("")
+            var options = new RestClientOptions("https://restful-booker.herokuapp.com")
             {
                 ThrowOnAnyError = true,
-                Timeout = 1000
+                Timeout = 5000
             };
-
-            ApiClient = new RestClient(options);
-        }
-
-        public void MakeRequest(){
-            
+            Client = new RestClient(options)
+            {
+                Authenticator = new HttpBasicAuthenticator(
+                    Environment.GetEnvironmentVariable("qaUser"),
+                    Environment.GetEnvironmentVariable("qaPass")
+                )
+            };
         }
     }
 }
