@@ -12,7 +12,11 @@ public class ContactUsTest
         Browser.NavigateTo();
     }
 
-
+    /// <summary>
+    /// Clicks on COntact Us Button and Opens Contact us form.
+    /// Fill in all fields and clicks SUbmit.
+    /// Asserts the success message is displayed.
+    /// </summary>
     [Test]
     public void TestSendValidContactForm()
     {
@@ -23,6 +27,11 @@ public class ContactUsTest
         Assert.IsTrue(contactUs.CheckIfSentSuccessfully());
     }
 
+    /// <summary>
+    /// Clicks on COntact Us Button and Opens Contact us form.
+    /// Leaves Fields Empty and Submits the Form.
+    /// Asserts Error message is displayed.
+    /// </summary>
     [Test]
     public void TestSendEmptyContactForm()
     {

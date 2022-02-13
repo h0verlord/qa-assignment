@@ -12,6 +12,9 @@ public class RegistrationTest
         Browser.NavigateTo();
     }
 
+    /// <summary>
+    /// Click on Sign In button, clicks Register with empty email, Asserts the error is displayed.
+    /// </summary>
     [Test]
     public void TestEmptyEmailAddress()
     {
@@ -21,6 +24,9 @@ public class RegistrationTest
         Assert.IsTrue(signInPage.CheckIfErrorIsDisplayed, "Error not displayed after timeout.");
     }
 
+    /// <summary>
+    /// Click on Sign In button, Fills invalid email format, click Register and Asserts the error is displayed.
+    /// </summary>
     [Test]
     public void TestInvalidEmailAddress()
     {
@@ -30,6 +36,11 @@ public class RegistrationTest
         Assert.IsTrue(signInPage.CheckIfErrorIsDisplayed, "Error not displayed after timeout.");
     }
 
+    /// <summary>
+    /// Click on Sign In button, Fills valid email format and clicks Register.
+    /// After opening Register form, fills all mandatory fields and clicks Submit.
+    /// Asserts My Account Page is opened.
+    /// </summary>
     [Test]
     public void TestRegisterValidEmailAddress()
     {
