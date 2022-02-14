@@ -4,7 +4,7 @@ using TestHelpers;
 
 namespace PageObjects
 {
-    public class ContactUs
+    public class ContactUs : BasePage
     {
         private By contactFormBox = By.ClassName("contact-form-box");
         private By subjectDropDown = By.Id("id_contact");

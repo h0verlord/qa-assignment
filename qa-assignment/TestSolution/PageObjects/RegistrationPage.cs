@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using PageObjects;
 using TestHelpers;
 
-public class Registration
+public class Registration  : BasePage
 {
 
     #region Personal Info Elements
